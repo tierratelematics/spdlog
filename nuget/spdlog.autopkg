@@ -1,0 +1,105 @@
+#defines {
+    // Global variables may be added here.
+    // Variables on the "value" side of each definition will be processed at access time.
+    GlobalVar1 = "";
+}
+
+configurations {
+    // This node contains pivot information.
+    // These are discussed in detail in the Pivots section.
+}
+
+
+
+nuget {
+
+    #defines {
+        // Variable definitions specific to this node (ie. "nuget").
+        // Only available while inside this scope.
+        // This metadata is not needed for most packages and is typically omitted.
+    };
+
+
+    nuspec {
+        id = spdlog.native;
+        version : 1.0.0;
+        title: spdlog;
+        authors: {Gabi Melman (spdlog), Denis Brachet Barbuse (nuget)};
+        owners: {Gabi Melman, gabime, Denis Brachet Barbuse};
+        licenseUrl: "https://github.com/gabime/spdlog/blob/v1.x/LICENSE";
+        projectUrl: "https://github.com/gabime/spdlog";
+        iconUrl: "https://github.com/gabime/spdlog";
+        requireLicenseAcceptance:false;
+        summary:"Very fast, header only, C++ logging library.";
+        description: "Very fast, header only, C++ logging library.";
+        releaseNotes: "-.";
+        copyright: Copyright 2018;
+        tags: { native, spdlog };
+        };
+        
+    #output-packages {
+        // Output file definitions.  These are covered in detail in Output Files.
+        // This metadata is not needed for most packages and is typically omitted.
+    }
+      
+
+    dependencies {
+        // This node defines any outside items which may be needed to consume this package.
+        //packages : {
+            // This is a list of other NuGet packages required to use this package.
+            // Each item follows the format "<pkg_name>/<version>"
+            // my_pkg/1.0.0,
+            // my_other_pkg/2.1.5.33
+        //};
+    }
+      
+    // the files that go into the content folders
+    files {
+        // File location information.  This node is critical for all packages, and is
+        // where much of the effort is.  All file paths are relative to this .autopkg
+        // file's location.
+
+        // This node is frequently divided by multiple condition statements or rules.
+        // Below is an example of how a typical package might be described.
+        // For the below examples, we assume that this file is in
+        //      <src_root>\contrib\coapp\
+        // and that the compiled libraries are in a semi-logical directory tree in
+        //      <src_root>\output\.
+
+        // All .h and .hpp  files in <src_root>\include, and in subdirectories.
+
+//        include: { ..\include\**\* };
+
+        nested1Include: { 
+            #destination = ${d_include}spdlog;
+            "..\include\**\*"
+            }
+        }
+       
+    props {
+        // Additional declarations to insert into consuming projects before most of the
+        // project settings. (These may be modified in visual studio by a developer
+        // consuming this package.)
+        // This node is typically not needed for most packages and may be omitted.
+    }
+
+    
+    targets {
+        // Additional declarations to insert into consuming projects after most of the
+        // project settings. (These may NOT be modified in visual studio by a developer
+        // consuming this package.)
+        // This node is often used to set defines that are required that must be set by
+        // the consuming project in order to correctly link to the libraries in this
+        // package.  Such defines may be set either globally or only set under specific
+        // conditions.
+        //
+        // Defines += HAS_ZIVAGO_COMMON;
+        // [dynamic]
+        //     Defines += HAS_ZIVAGO_COMMON;
+    }
+    
+        
+        
+        
+        
+    };
